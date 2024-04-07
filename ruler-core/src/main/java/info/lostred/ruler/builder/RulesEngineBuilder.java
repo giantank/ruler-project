@@ -45,7 +45,7 @@ public class RulesEngineBuilder {
      * @param grade 严重等级
      * @return 规则引擎建造者
      */
-    public RulesEngineBuilder terminableGrade(Grade grade) {
+    public RulesEngineBuilder terminationGrade(Grade grade) {
         if (abstractRulesEngine instanceof TerminableRulesEngine) {
             ((TerminableRulesEngine) abstractRulesEngine).setTerminationGrade(grade);
         }

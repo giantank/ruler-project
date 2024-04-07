@@ -31,8 +31,11 @@ public class TerminableRulesEngine extends AbstractRulesEngine {
             Result result = Result.newInstance();
             for (AbstractRule rule : rules) {
                 try {
-                    if (this.executeInternal(rootObject, rule, result) && terminationGrade.equals(rule.getRuleDefinition().getGrade())) {
-                        return result;
+                    if (this.executeInternal(rootObject, rule, result)) {
+                        Grade ruleGrade = rule.getRuleDefinition().getGrade();
+                        if (terminationGrade.ordinal() <= ruleGrade.ordinal()) {
+                            return result;
+                        }
                     }
                 } catch (Exception e) {
                     String message = this.getExceptionMessage(rule, e);
