@@ -33,6 +33,7 @@ public class DefaultRuleFactory extends AbstractRuleFactory {
         }
     }
 
+    @Override
     protected AbstractRule createRule(String ruleCode, RuleDefinition ruleDefinition) {
         Class<? extends AbstractRule> ruleClass = ruleDefinition.getRuleClass();
         try {

@@ -8,11 +8,11 @@ import info.lostred.ruler.rule.AbstractRule;
 import java.util.Set;
 
 /**
- * 完全执行返回详细结果的规则引擎
+ * 不可终止的规则引擎
  *
  * @author lostred
  */
-public class CompleteRulesEngine extends AbstractRulesEngine {
+public class NoTerminableRulesEngine extends AbstractRulesEngine {
     @Override
     public Result execute(Object rootObject) {
         try {
