@@ -9,9 +9,9 @@ public enum EngineType {
     /**
      * 规则引擎将执行完所有的规则
      */
-    COMPLETE,
+    NO_TERMINABLE,
     /**
-     * 规则引擎在非法等级规则触发后将结束执行
+     * 规则引擎在设定终止等级的规则触发后将结束执行
      */
-    INCOMPLETE
+    TERMINABLE
 }

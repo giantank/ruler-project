@@ -1,6 +1,8 @@
 package info.lostred.ruler.builder;
 
+import info.lostred.ruler.constant.Grade;
 import info.lostred.ruler.engine.AbstractRulesEngine;
+import info.lostred.ruler.engine.TerminableRulesEngine;
 import info.lostred.ruler.engine.RulesEngine;
 import info.lostred.ruler.exception.RulesEnginesException;
 import info.lostred.ruler.factory.RuleFactory;
@@ -35,6 +37,19 @@ public class RulesEngineBuilder {
             throw new RulesEnginesException("Internal error: " + rulesEngineClass.getName() +
                     " cannot be instantiated.", e, rulesEngineClass);
         }
+    }
+
+    /**
+     * 设置引擎终止的严重等级
+     *
+     * @param grade 严重等级
+     * @return 规则引擎建造者
+     */
+    public RulesEngineBuilder terminableGrade(Grade grade) {
+        if (abstractRulesEngine instanceof TerminableRulesEngine) {
+            ((TerminableRulesEngine) abstractRulesEngine).setTerminationGrade(grade);
+        }
+        return this;
     }
 
     /**

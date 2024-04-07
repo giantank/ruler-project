@@ -1,5 +1,6 @@
 package info.lostred.ruler.engine;
 
+import info.lostred.ruler.constant.Grade;
 import info.lostred.ruler.domain.Result;
 import info.lostred.ruler.exception.RulesEnginesException;
 import info.lostred.ruler.factory.RuleFactory;
@@ -8,11 +9,21 @@ import info.lostred.ruler.rule.AbstractRule;
 import java.util.Set;
 
 /**
- * 不完全执行返回详细结果的规则引擎
+ * 可终止的规则引擎
  *
  * @author lostred
  */
-public class IncompleteRulesEngine extends AbstractRulesEngine {
+public class TerminableRulesEngine extends AbstractRulesEngine {
+    private Grade terminationGrade;
+
+    public Grade getTerminationGrade() {
+        return terminationGrade;
+    }
+
+    public void setTerminationGrade(Grade terminationGrade) {
+        this.terminationGrade = terminationGrade;
+    }
+
     @Override
     public Result execute(Object rootObject) {
         try {
@@ -20,7 +31,7 @@ public class IncompleteRulesEngine extends AbstractRulesEngine {
             Result result = Result.newInstance();
             for (AbstractRule rule : rules) {
                 try {
-                    if (this.executeInternal(rootObject, rule, result)) {
+                    if (this.executeInternal(rootObject, rule, result) && terminationGrade.equals(rule.getRuleDefinition().getGrade())) {
                         return result;
                     }
                 } catch (Exception e) {

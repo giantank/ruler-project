@@ -1,6 +1,5 @@
 package info.lostred.ruler.rule;
 
-import info.lostred.ruler.core.Evaluator;
 import info.lostred.ruler.core.ExecutionContextHolder;
 import org.springframework.expression.ExpressionParser;
 
@@ -11,7 +10,7 @@ import org.springframework.expression.ExpressionParser;
  * @author lostred
  * @since 2.2.0
  */
-public class DeclarativeRule extends AbstractRule implements Evaluator {
+public class DeclarativeRule extends AbstractRule {
     /**
      * 表达式解析器
      */

@@ -6,9 +6,10 @@ import info.lostred.ruler.builder.RuleDefinitionBuilder;
 import info.lostred.ruler.builder.RuleFactoryBuilder;
 import info.lostred.ruler.builder.RulesEngineBuilder;
 import info.lostred.ruler.constant.EngineType;
+import info.lostred.ruler.constant.Grade;
 import info.lostred.ruler.domain.RuleDefinition;
-import info.lostred.ruler.engine.CompleteRulesEngine;
-import info.lostred.ruler.engine.IncompleteRulesEngine;
+import info.lostred.ruler.engine.NoTerminableRulesEngine;
+import info.lostred.ruler.engine.TerminableRulesEngine;
 import info.lostred.ruler.engine.RulesEngine;
 import info.lostred.ruler.factory.*;
 import info.lostred.ruler.util.ClassUtils;
@@ -118,15 +119,19 @@ public class RulerAutoConfiguration {
                                        List<Method> globalFunctions, RulerProperties rulerProperties) {
             String type = rulerProperties.getEngineType().toUpperCase();
             String businessType = rulerProperties.getBusinessType();
-            if (EngineType.COMPLETE.equals(EngineType.valueOf(type))) {
-                return RulesEngineBuilder.build(CompleteRulesEngine.class)
+            if (EngineType.NO_TERMINABLE.equals(EngineType.valueOf(type))) {
+                return RulesEngineBuilder.build(NoTerminableRulesEngine.class)
                         .businessType(businessType)
                         .ruleFactory(ruleFactory)
                         .beanResolver(beanResolver)
                         .globalFunctions(globalFunctions)
                         .getRulesEngine();
             } else {
-                return RulesEngineBuilder.build(IncompleteRulesEngine.class)
+                Grade terminableGrade = rulerProperties.getTerminationGrade();
+                if (terminableGrade == null) {
+                    throw new RuntimeException("rule.termination-grade cannot be null, when rule.engine-type is 'terminable'.");
+                }
+                return RulesEngineBuilder.build(TerminableRulesEngine.class)
                         .businessType(businessType)
                         .ruleFactory(ruleFactory)
                         .beanResolver(beanResolver)

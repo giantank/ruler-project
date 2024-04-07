@@ -1,6 +1,7 @@
 package info.lostred.ruler.autoconfigure;
 
 import info.lostred.ruler.constant.EngineType;
+import info.lostred.ruler.constant.Grade;
 import info.lostred.ruler.constant.RulerConstants;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -12,7 +13,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("ruler")
 public class RulerProperties {
     private String businessType = RulerConstants.BUSINESS_TYPE_COMMON;
-    private String engineType = EngineType.COMPLETE.name();
+    private String engineType = EngineType.NO_TERMINABLE.name();
+    private Grade terminationGrade = Grade.REMINDER;
     private String[] ruleScanPackages = {};
     private String[] domainScanPackages = {};
 
@@ -30,6 +32,14 @@ public class RulerProperties {
 
     public void setEngineType(String engineType) {
         this.engineType = engineType;
+    }
+
+    public Grade getTerminationGrade() {
+        return terminationGrade;
+    }
+
+    public void setTerminationGrade(Grade terminationGrade) {
+        this.terminationGrade = terminationGrade;
     }
 
     public String[] getRuleScanPackages() {

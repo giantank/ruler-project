@@ -19,7 +19,7 @@
       "type": "java.lang.String",
       "sourceType": "info.lostred.ruler.autoconfigure.RulerProperties",
       "description": "容器单实例规则引擎的默认引擎类型.",
-      "defaultValue": "complete"
+      "defaultValue": "no_terminable"
     },
     {
       "name": "ruler.rule-scan-packages",
@@ -39,12 +39,12 @@
       "name": "ruler.engine-type",
       "values": [
         {
-          "value": "incomplete",
-          "description": "不完全执行返回详细结果的规则引擎，能够保存校验的结果报告，并在违规的时候会结束判断."
+          "value": "terminable",
+          "description": "可终止的规则引擎，能够返回校验的结果报告，并在等级规则触发的时候会结束执行."
         },
         {
-          "value": "complete",
-          "description": "完全执行返回详细结果的规则引擎，能够保存校验的结果报告，会执行规则集合中的所有判断."
+          "value": "no_terminable",
+          "description": "不可终止的规则引擎，能够返回校验的结果报告，会执行引擎中的所有规则."
         }
       ]
     },
