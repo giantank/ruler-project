@@ -1,6 +1,6 @@
 ruler:
   business-type: person
-  engine-type: complete
+  engine-type: terminable
   rule-scan-packages: info.lostred.ruler.test.rule
   domain-scan-packages: info.lostred.ruler.test.domain
 

@@ -127,11 +127,12 @@ public class RulerAutoConfiguration {
                         .globalFunctions(globalFunctions)
                         .getRulesEngine();
             } else {
-                Grade terminableGrade = rulerProperties.getTerminationGrade();
-                if (terminableGrade == null) {
+                Grade terminationGrade = rulerProperties.getTerminationGrade();
+                if (terminationGrade == null) {
                     throw new RuntimeException("rule.termination-grade cannot be null, when rule.engine-type is 'terminable'.");
                 }
                 return RulesEngineBuilder.build(TerminableRulesEngine.class)
+                        .terminationGrade(terminationGrade)
                         .businessType(businessType)
                         .ruleFactory(ruleFactory)
                         .beanResolver(beanResolver)

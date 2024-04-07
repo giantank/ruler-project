@@ -50,14 +50,13 @@ public class Result implements Serializable {
     }
 
     /**
-     * 更新校验结果的严重等级，"ILLEGAL"的优先级最高，其次是"SUSPECTED"，最后是"QUALIFIED"
+     * 更新校验结果的严重等级，"ILLEGAL"的优先级最高，其次是"SUSPECTED"和"REMINDER"，最后是"QUALIFIED"
      *
      * @param grade 严重等级
      * @see Grade
      */
     public void updateGrade(Grade grade) {
-        if (Grade.QUALIFIED.equals(this.grade)
-                || (Grade.SUSPECTED.equals(this.grade) && !Grade.QUALIFIED.equals(grade))) {
+        if (this.grade.ordinal() < grade.ordinal()) {
             this.grade = grade;
         }
     }
